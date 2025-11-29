@@ -1,105 +1,98 @@
-# Fake News Detector - Browser Extension
+# MimasAI - AI-Powered Tweet Verification
 
-A Chrome/Edge browser extension that helps detect potentially false or misleading information on individual tweets on X.com (Twitter). Similar to how Grammarly adds inline suggestions, this extension adds a "Check" button to each tweet for instant credibility analysis.
+MimasAI is a powerful tool designed to detect potentially false or misleading information on X.com (Twitter) using advanced LLM analysis (Google Gemini). It is available as both a **Browser Extension** and a **Mobile App**.
 
 ## Features
 
-- **Inline Tweet Buttons**: A "Check" button appears on every tweet's action bar (next to like, retweet, share)
-- **Individual Tweet Analysis**: Analyzes each tweet separately, not the whole page
-- **One-Click Check**: Tap the button on any tweet to analyze just that tweet's content
-- **Credibility Score**: Get a 0-100 credibility score based on content analysis
-- **Visual Feedback**: Color-coded results (green for reliable, yellow for uncertain, red for potentially misleading)
-- **Detailed Breakdown**: See suspicious words, reliable indicators, clickbait phrases, and more
-- **Auto-Detection**: Automatically adds buttons to new tweets as you scroll (works with infinite scroll)
+- **Direct AI Analysis**: Uses Google's Gemini 1.5 Flash model to analyze tweet content, context, and author credibility.
+- **Categorical Verdicts**: Provides clear verdicts: **True**, **Likely True**, **Unverified**, **Likely False**, or **False**.
+- **Visual Gauge**: Easy-to-read color-coded gauge representing the credibility score.
+- **Author Context**: Checks for verified status to flag suspicious unverified accounts.
+- **Privacy Focused**: Your API key is stored locally on your device.
 
-## Installation Instructions
+---
 
-### For Chrome/Edge:
+## 1. Getting Started: Get Your API Key
 
-1. Open Chrome/Edge and navigate to `chrome://extensions/` (or `edge://extensions/`)
-2. Enable **Developer mode** (toggle in the top right corner)
-3. Click **Load unpacked**
-4. Select the folder containing this extension (`mumbai` folder)
-5. The extension should now appear in your extensions list
-6. Navigate to **X.com (Twitter)** and you'll see a "Check" button on each tweet's action bar
+To use MimasAI, you need a free Google Gemini API Key.
 
-## How to Use
+1.  Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
+2.  Click **Create API Key**.
+3.  Copy the key (starts with `AIza...`).
 
-1. Navigate to **x.com** (or **twitter.com**)
-2. Look for the purple "Check" button on each tweet (appears in the action bar with like/retweet/share buttons)
-3. Click the "Check" button on any tweet you want to verify
-4. Wait for the analysis to complete (~1 second)
-5. Review the credibility score, status, and detailed analysis in the popup modal
-6. Click outside the modal or the X button to close it
-7. The button automatically appears on new tweets as you scroll
+---
 
-## Current Analysis Method (Dummy)
+## 2. Browser Extension (Chrome/Edge/Brave)
 
-The extension currently uses a **dummy analysis algorithm** for demonstration purposes. It analyzes individual tweet content based on:
+The extension adds a "Check" button directly to tweets on X.com.
 
-- **Suspicious words**: "shocking", "unbelievable", "miracle", "secret", "they don't want you to know", "must see", "you won't believe"
-- **Reliable indicators**: "source:", "according to", "study shows", "research", "data", "report", "official", "confirmed"
-- **Clickbait phrases**: "click here", "link in bio", "dm for", "follow for more"
+### Installation
 
-The credibility score starts at 60 (neutral) and:
-- Adds 8 points for each reliable indicator
-- Subtracts 12 points for each suspicious word
-- Subtracts 10 points for each clickbait phrase
-- Penalizes very short tweets (less context)
+1.  **Download/Clone** this repository to your computer.
+2.  Open your browser and go to the Extensions page:
+    *   Chrome: `chrome://extensions`
+    *   Edge: `edge://extensions`
+3.  Enable **Developer Mode** (toggle in the top-right corner).
+4.  Click **Load Unpacked**.
+5.  Select the **root folder** of this project (where `manifest.json` is located).
 
-**⚠️ Important**: This is a demonstration version. For production use, you should integrate with a real fact-checking API or machine learning model.
+### Configuration
 
-## File Structure
+1.  Click the **MimasAI icon** in your browser toolbar.
+2.  Click **"Open Options to Configure API Key"**.
+3.  Paste your **Gemini API Key** and click **Save**.
 
-```
-mumbai/
-├── manifest.json       # Extension configuration
-├── content.js          # Main script that runs on web pages
-├── styles.css          # Styling for the floating button and modal
-├── popup.html          # Extension popup (shown when clicking extension icon)
-├── icon.svg           # Source icon file
-├── icon16.png         # 16x16 extension icon
-├── icon48.png         # 48x48 extension icon
-├── icon128.png        # 128x128 extension icon
-└── README.md          # This file
-```
+### Usage
 
-## Customization Ideas
+1.  Go to [x.com](https://x.com).
+2.  You will see a **"Check"** button on every tweet (next to the share icon).
+3.  Click it to instantly verify the tweet.
 
-### Enhance Twitter/X.com Features:
+---
 
-1. **Account Verification**: Check if the tweeting account is verified ✓ (badge status)
-2. **Link Checking**: Analyze URLs in tweets for domain reputation
-3. **Image Analysis**: Check for manipulated or AI-generated images
-4. **Fact-Check Integration**: Connect to fact-checking APIs (FactCheck.org, Snopes, Google Fact Check)
-5. **Tweet Thread Analysis**: Analyze entire thread context, not just individual tweets
-6. **Engagement Analysis**: Consider likes/retweets ratio as credibility signal
-7. **Account Age/History**: Check account creation date and posting patterns
+## 3. Mobile App (iOS/Android)
 
-### Enhance Detection Logic:
+The mobile app allows you to verify X.com links on the go.
 
-Replace the dummy analysis in `content.js` with:
-- **API Integration**: Connect to fact-checking APIs (FactCheck.org, Snopes, etc.)
-- **NLP Models**: Use natural language processing for sentiment analysis
-- **Source Credibility**: Check domain reputation
-- **Cross-Reference**: Verify claims against multiple sources
+### Prerequisites
 
-## Next Steps
+-   [Node.js](https://nodejs.org/) installed.
+-   [Expo Go](https://expo.dev/client) app installed on your phone.
 
-1. Replace placeholder icons with actual PNG icons
-2. Integrate with a real fact-checking API
-3. Add Twitter/X.com specific analysis features
-4. Implement user settings and preferences
-5. Add reporting functionality
-6. Create a backend service for more complex analysis
+### Installation & Running
 
-## Notes
+1.  Open a terminal in the project folder.
+2.  Navigate to the mobile directory:
+    ```bash
+    cd mobile
+    ```
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
+4.  Start the app:
+    ```bash
+    npx expo start
+    ```
+5.  Scan the **QR Code** with your phone's camera (iOS) or the Expo Go app (Android).
 
-- The extension requests permission to run on all URLs (`<all_urls>`)
-- It uses Manifest V3 for Chrome/Edge compatibility
-- Icons are currently placeholders - you can replace them with custom designs
-- The extension is purely client-side (no data is sent to external servers)
+### Usage
+
+1.  **First Run**: Enter your **Gemini API Key** when prompted.
+2.  **Verify**:
+    *   **Paste**: Copy a tweet link and tap "Paste".
+    *   **Type**: Manually enter an X.com link.
+    *   Tap **"Verify Tweet"**.
+3.  The app will load the tweet in the background and display the analysis result.
+
+---
+
+## Troubleshooting
+
+-   **API Error 404/400**: Ensure your API key is valid and has access to the `gemini-1.5-flash` model.
+-   **"Fetching Tweet" Stuck**: Ensure you are logged in to X.com if prompted (the app handles this in the background usually, but may require a one-time login).
+-   **Extension Button Not Showing**: Refresh the X.com page.
 
 ## License
 
-Free to use and modify for educational purposes.
+MIT License. Free to use and modify.
